@@ -31,24 +31,35 @@ class Sorting {
         
     }
     
-    func mergeSort(data: [Int]) -> [Int] {
+    func mergeSort(data:[Int]) -> [Int] {
+        var newData = [[Int]]()
+        
+        for item in data {
+            newData.append([item])
+        }
+        
+        return partialMergeSort(data: newData)[0]
+        
+    }
     
+    func partialMergeSort(data: [[Int]]) -> [[Int]] {
+        
         if data.count <= 1 {
             return data
-        } else if data.count == 2{
-            if data[0] > data[1] {
-                let newData = [data[1], data[0]]
-                return newData
-            } else {
-                return data
-            }
-        } else {
-            let middle = data.count / 2
-            let leftArray = Array(data.prefix(middle))
-            let rightArray = Array(data.dropFirst(middle))
-            
-            return merge(data1: leftArray, data2: rightArray)
         }
+        
+        var tempData = data
+        var secondArray = [[Int]]()
+        //make even so we can safely and uniformly split
+        if tempData.count % 2 == 1 {
+            tempData += []
+        }
+        for i in 0...data.count-2 where i % 2 == 0 { //only even i
+            secondArray[i] = merge(data1: tempData[i], data2: tempData[i+1])
+        }
+        
+        return partialMergeSort(data:secondArray)
+        
         
     }
     //I think this function works - the issue is we need to first split everything up before we can apply merge, as this relies on the subarrays it's using being sorted
@@ -68,9 +79,7 @@ class Sorting {
         return newData
     }
     
-    func split(data:[Int]) {
-        
-    }
+    
     
 }
 
