@@ -11,12 +11,39 @@ import XCTest
 class UnknownTest: XCTestCase {
 
     func testAddFirstAndLastWithIntegerArray() {
+        let unknown = Unknown()
         //arrange
         let expected = 6
         //act
-        let result =  Unknown.summingArray(data:[1,5])
+        let result =  unknown.summingArray(data:[1,5])
         //assert
         XCTAssertEqual(expected, result)
     }
+    
+    func testAddFirstAndLastWithManyArrays() {
+        //arrange
+        let unknown = Unknown()
+        let testCases = [(expected:6, input: [3,3]), (expected: 7, input:[1,2,6]), (expected:15, input:[3,5,6,11,12])]
+        
+        //act
+        //assert
+        for tuple in testCases {
+            XCTAssertEqual(tuple.expected, unknown.summingArray(data: tuple.input))
+        }
+    }
+    
+    func testAddFirstAndLastWithArraySizeZeroAndOne() {
+        //arrange
+        let unknown = Unknown()
+        let testCases = [(expected:0, input:[]), (expected:10, input:[5]), (expected:26, input:[13])]
+        
+        //act
+        //assert
+        for tuple in testCases {
+            XCTAssertEqual(tuple.expected, unknown.summingArray(data: tuple.input))
+        }
+    }
+    
+    
 
 }

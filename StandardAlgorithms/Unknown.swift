@@ -10,7 +10,13 @@ import Foundation
 
 class Unknown {
     func summingArray(data: [Int]) -> Int {
-        return 1+5
+        let length = data.count
+        
+        if length == 0 {
+            return 0
+        } else {
+            return data[0] + data[length-1]
+        }
     }
 }
 
