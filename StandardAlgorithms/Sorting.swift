@@ -36,6 +36,7 @@ class Sorting {
         
         for item in data {
             newData.append([item])
+            print("newData!!!! \(newData)")
         }
         
         return partialMergeSort(data: newData)[0]
@@ -55,7 +56,8 @@ class Sorting {
             tempData += []
         }
         for i in 0...data.count-2 where i % 2 == 0 { //only even i
-            secondArray[i] = merge(data1: tempData[i], data2: tempData[i+1])
+            secondArray.append(merge(data1: tempData[i], data2: tempData[i+1]))
+            print("This is the secnondArray. Yay! \(secondArray)")
         }
         
         return partialMergeSort(data:secondArray)
@@ -65,16 +67,21 @@ class Sorting {
     //I think this function works - the issue is we need to first split everything up before we can apply merge, as this relies on the subarrays it's using being sorted
     func merge(data1: [Int], data2: [Int]) -> [Int]{
         var newData = [Int]()
+        var counter = 0
         for item in data2 {
             var isGreaterThan = true
-            var counter = 0
+            counter = 0
             while isGreaterThan && (counter <= data1.count-1){
                 isGreaterThan = (item >= data1[counter])
-                newData.append(data1[counter])
+                if isGreaterThan {
+                    newData.append(data1[counter])
+                }
                 counter += 1
             }
             newData.append(item)
         }
+        
+        newData += data1.dropFirst(counter-1)
         
         return newData
     }
