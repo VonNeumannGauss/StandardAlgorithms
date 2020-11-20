@@ -68,5 +68,9 @@ class Sorting {
         return newData
     }
     
+    func split(data:[Int]) {
+        
+    }
+    
 }
 
