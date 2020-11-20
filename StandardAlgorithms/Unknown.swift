@@ -18,6 +18,16 @@ class Unknown {
             return data[0] + data[length-1]
         }
     }
+    
+    func findMode(data: [Int]) -> Int {
+        let length = data.count
+        if length % 2 == 0 {
+            let average = (data[(length/2)-1] + data[(length/2)])/2
+            return average 
+        } else {
+            return data[length/2]
+        }
+    }
 }
 
 
