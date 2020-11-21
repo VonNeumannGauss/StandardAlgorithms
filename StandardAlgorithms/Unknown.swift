@@ -58,6 +58,31 @@ class Unknown {
             return mostFrequentNumber
         }
     }
+    
+    func findSecondSmallestItemInIntegerArray(data: [Int]) -> Int? {
+        if data.count <= 1 {
+            return nil
+        } else {
+            var smallest = data[0]
+            //default value here is 0. You need to fix this so that the value it takes is present in the array
+            var secondSmallestPlaceHolder = 0.9
+            var secondSmallest = Int()
+            print("This is the value of secondSmallest at the beginning: \(secondSmallest)")
+            for i in 1...data.count-1 {
+                if data[i] < smallest {
+                    secondSmallest = smallest
+                    smallest = data[i]
+                } else if (secondSmallestPlaceHolder == 0.9) && (data[i] != smallest) {
+                    secondSmallest = data[i]
+                    //we need this thing so that we check if secondSmallest has been mutated yet without having to loop through the array another time to actually assign it a value
+                    secondSmallestPlaceHolder = 0.8
+                } else if (data[i] < secondSmallest) && (data[i] != smallest) {
+                    secondSmallest = data[i]
+                }
+            }
+            return secondSmallest
+        }
+    }
 }
 
 

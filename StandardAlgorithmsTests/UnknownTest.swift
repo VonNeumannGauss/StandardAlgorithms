@@ -65,4 +65,47 @@ class UnknownTest: XCTestCase {
             XCTAssertEqual(tuple.expected, unknown.findModeOfSortedArray(data: tuple.input))
         }
     }
+    
+    func testReturnSecondSmallestItemInIntegerArrayWithArraySizeUpTo1() {
+        //arrange
+        let unknown = Unknown()
+        //act
+        let expected:Int? = nil
+        let result = unknown.findSecondSmallestItemInIntegerArray(data: [1])
+        //arrange
+        XCTAssertEqual(expected, result)
+    }
+    
+    func testReturnSecondSmallestItemInIntegerArrayWithArraySize3() {
+        //arrange
+        let unknown = Unknown()
+        //act
+        let expected = 4
+        let result = unknown.findSecondSmallestItemInIntegerArray(data: [5,3,4])
+        //assert
+        XCTAssertEqual(result, expected)
+    }
+    
+    func testReturnSecondSmallestItemInIntegerArrayWithDuplicatesInArray() {
+        //arrange
+        let unknown = Unknown()
+        //act
+        let expected = 4
+        let result = unknown.findSecondSmallestItemInIntegerArray(data: [5,5,5,5,5,5,4,4,4,4,5,5,5,5,5,4,4,4,4,4,6,6,6,6,3,3,3,3])
+        //assert
+        XCTAssertEqual(result, expected)
+    }
+    
+    func testReturnSecondSmallestItemInIntegerArrayWithManyArrays() {
+        //arrange
+        let unknown = Unknown()
+        //act
+        //assert
+        let testCases = [(expected:nil, input:[]), (expected:5, input:[5,6,7,8,9,4]), (expected:26, input:[13,13,26,26,26,27,27,28,29,30]), (expected:2, input:[1,3,3,3,3,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,6,6,6,6,7,7,7,8,9,2,2,2,2,1])]
+        
+        for tuple in testCases {
+            XCTAssertEqual(tuple.expected, unknown.findSecondSmallestItemInIntegerArray(data: tuple.input))
+        }
+    }
+    
 }
