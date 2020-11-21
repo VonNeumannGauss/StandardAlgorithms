@@ -44,24 +44,25 @@ class UnknownTest: XCTestCase {
         }
     }
     
-    func testFindModeOfOddSortedIntegerArray() {
+    func testFindModeOfSingleSortedArray() {
         //arrange
         let unknown = Unknown()
         //act
         let expected = 5
-        let result = unknown.findMode(data:[1,5,10])
+        let result = unknown.findModeOfSortedArray(data:[1,2,5,5,6,7])
         //assert
-        XCTAssertEqual(expected, result)
+        XCTAssertEqual(expected,  result)
     }
     
-    func testFindModeOfEvenSortedIntegerArray() {
+    func testFindModeOfManySortedArrays() {
         //arrange
         let unknown = Unknown()
         //act
-        let expected = 6
-        let result = unknown.findMode(data:[5,7])
         //assert
-        XCTAssertEqual(expected, result)
+        let testCases = [(expected:nil, input:[]), (expected:5, input:[5]), (expected:26, input:[13, 13,26,26,26,27,27,28,29,30]), (expected:5, input:[1,2,3,3,3,3,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,6,6,6,6,7,7,7,8,9])]
+        
+        for tuple in testCases {
+            XCTAssertEqual(tuple.expected, unknown.findModeOfSortedArray(data: tuple.input))
+        }
     }
-
 }
