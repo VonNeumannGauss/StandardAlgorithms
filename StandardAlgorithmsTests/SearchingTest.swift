@@ -66,7 +66,7 @@ class SearchingTest: XCTestCase {
         }
     }
     
-    func testPerformanceOfBubbleSortWithArraySizeFiveHundred() {
+    func testPerformanceOfLinearSearchWithArraySizeFiveHundred() {
         let searching = Searching()
         var data = [Int]()
         for _ in 1...500 {
@@ -125,6 +125,40 @@ class SearchingTest: XCTestCase {
                          (expected: true, array: [4,100,100,10000], itemToFind: 4)]
         for item in testCases {
             XCTAssertEqual(item.expected, searching.binarySearch(data: item.array, itemToFind: item.itemToFind))
+        }
+    }
+    
+    func testPerformanceOfBinarySearchWithArraySizeFive() {
+        let searching = Searching()
+        //this is a performance test - checks how fast or slow your code is
+        measure {
+            _ = searching.linearSearch(data: [1,2,3,6,8,10], itemToFind: 2)
+        }
+    }
+    
+    func testPerformanceOfBinarySearchWithArraySizeFifty() {
+        let searching = Searching()
+        var data = [Int]()
+        for _ in 1...50 {
+            data.append(Int.random(in:1...100))
+        }
+        data.sort()
+        //this is a performance test - checks how fast or slow your code is
+        measure {
+            _ = searching.linearSearch(data: data, itemToFind: 10)
+        }
+    }
+    
+    func testPerformanceOfBinarySearchWithArraySizeFiveHundred() {
+        let searching = Searching()
+        var data = [Int]()
+        for _ in 1...500 {
+            data.append(Int.random(in:1...100))
+        }
+        data.sort()
+        //this is a performance test - checks how fast or slow your code is
+        measure {
+            _ = searching.linearSearch(data: data, itemToFind: 50)
         }
     }
 
