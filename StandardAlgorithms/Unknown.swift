@@ -18,7 +18,7 @@ class Unknown {
             return data[0] + data[length-1]
         }
     }
-    //we made this by mistake - finds the median of a set given a sorted integer array
+    //made by mistake - finds the median of a set given a sorted integer array
     func findMedianOfSortedArray(data: [Int]) -> Int {
         let length = data.count
         if length % 2 == 0 {
