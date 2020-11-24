@@ -32,14 +32,17 @@ class Sorting {
     }
     
     func mergeSort(data:[Int]) -> [Int] {
-        var newData = [[Int]]()
-        
-        for item in data {
-            newData.append([item])
-            print("newData!!!! \(newData)")
+        if data.count <= 1 {
+            return data
+        } else {
+            var newData = [[Int]]()
+            
+            for item in data {
+                newData.append([item])
+            }
+            
+            return partialMergeSort(data: newData)[0]
         }
-        
-        return partialMergeSort(data: newData)[0]
         
     }
     
@@ -52,38 +55,38 @@ class Sorting {
         var tempData = data
         var secondArray = [[Int]]()
         //make even so we can safely and uniformly split
-        if tempData.count % 2 == 1 {
-            tempData += []
+        if (tempData.count % 2) == 1 {
+            tempData += [[]]
         }
-        for i in 0...data.count-2 where i % 2 == 0 { //only even i
-            secondArray.append(merge(data1: tempData[i], data2: tempData[i+1]))
-            print("This is the secnondArray. Yay! \(secondArray)")
+        
+        for i in 0...tempData.count-2 where i % 2 == 0 { //only even i
+            secondArray.append(merge(inData1: tempData[i],inData2: tempData[i+1]))
         }
         
         return partialMergeSort(data:secondArray)
         
         
     }
-    //I think this function works - the issue is we need to first split everything up before we can apply merge, as this relies on the subarrays it's using being sorted
-    func merge(data1: [Int], data2: [Int]) -> [Int]{
+    
+    func merge(inData1: [Int], inData2: [Int]) -> [Int] {
+        let data1 = inData1
+        var data2 = inData2
+        
         var newData = [Int]()
-        var counter = 0
-        for item in data2 {
-            var isGreaterThan = true
-            counter = 0
-            while isGreaterThan && (counter <= data1.count-1){
-                isGreaterThan = (item >= data1[counter])
-                if isGreaterThan {
-                    newData.append(data1[counter])
+        for item1 in data1 {
+            for item2 in data2 {
+                if item1 >= item2 {
+                    newData.append(item2)
+                    data2.removeFirst()
                 }
-                counter += 1
             }
-            newData.append(item)
+            newData.append(item1)
         }
         
-        newData += data1.dropFirst(counter-1)
+        newData += data2
         
         return newData
+        
     }
     
     
