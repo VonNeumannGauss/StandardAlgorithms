@@ -89,6 +89,57 @@ class Sorting {
         
     }
     
+    func quickSort(data: [Int]) -> [Int] {
+        if data.count <= 1 {
+            return data
+        } else {
+            let pivot = data[0]
+            var theLeft = [Int]()
+            var theRight = [Int]()
+            for i in 1..<data.count {
+                if data[i] > pivot {
+                    theRight.append(data[i])
+                } else {
+                    theLeft.append(data[i])
+                }
+            }
+            let arrayPivot = [pivot]
+            //this is NOT redundant because array[0] is an integer, but you need to have it as an array of size 1 in order to concatenate the arrays together
+            return quickSort(data: theLeft) + arrayPivot + quickSort(data:theRight)
+            //return theLeft + arrayPivot + theRight
+        }
+    }
+    
+    func insertionSort(data: [Int]) -> [Int] {
+        
+        if data.count <= 1 {
+            return data
+        } else {
+            var newArray = data
+            var counter = Int()
+            for index in 1...newArray.count-1 {
+                var isPlaced = false
+                counter = index-1
+                while !isPlaced && (counter >= 0) {
+                    if newArray[index] >= newArray[counter] {
+                        let item = newArray[index]
+                        newArray.remove(at:index)
+                        newArray.insert(item, at:counter+1)
+                        isPlaced = true
+                    }
+                    counter -= 1
+                }
+                //if value is smaller than everything, then put it right at the back
+                if !isPlaced {
+                    let item = newArray[index]
+                    newArray.remove(at:index)
+                    newArray.insert(item, at:0)
+                }
+            }
+            return newArray
+        }
+    }
+    
     
     
 }
