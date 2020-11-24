@@ -34,7 +34,9 @@ class Searching {
             let midpoint = data.count/2
             print(midpoint)
             print(data)
-            if data[midpoint] > itemToFind {
+            if data[midpoint] == itemToFind {
+                return true
+            } else if data[midpoint] > itemToFind {
                 return binarySearch(data: Array(data.dropLast(data.count - data.count/2)), itemToFind: itemToFind)
             } else {
                 return binarySearch(data: Array(data.dropFirst(data.count/2 + 1)), itemToFind: itemToFind)
